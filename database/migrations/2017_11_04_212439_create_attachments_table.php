@@ -21,6 +21,11 @@ class CreateAttachmentsTable extends Migration
             $table->integer('size')->nullable();
             $table->timestamps();
         });
+
+        Schema::table('attachments', function (Blueprint $table) {
+            $table->integer('user_id')->unsigned()->index()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**
